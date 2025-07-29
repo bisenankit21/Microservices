@@ -3,6 +3,8 @@ package com.example.cards.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 @Data
@@ -11,7 +13,7 @@ import lombok.Data;
 public class CardsDto {
 
     @NotEmpty(message = "Card Number must not be empty or null")
-    @Pattern(regexp = "^$|[0-9]{14}", message = "Card number must be 14 digits")
+    @Pattern(regexp = "^$|[0-9]{12}", message = "Card number must be 12 digits")
 
     @Schema(
             description = "Card number of eazy bank account",
@@ -35,25 +37,25 @@ public class CardsDto {
     )
     private String cardType;
 
-    @NotEmpty(message = "Total Limit must not be empty or null")
+    @Positive(message = "Total card limit should be greater than zero")
     @Schema(
             description = "Total limit of eazy bank account",
             example = "10000"
     )
-    private Long totalLimit;
+    private int totalLimit;
 
-    @NotEmpty(message = "Amount Used must not be empty or null")
+    @PositiveOrZero(message = "Total amount used should be equal or greater than zero")
     @Schema(
             description = "Amount used of eazy bank account",
             example = "5000"
     )
-    private Long amountUsed;
+    private int amountUsed;
 
-    @NotEmpty(message = "Available Amount must not be empty or null")
+    @PositiveOrZero(message = "Total available amount should be equal or greater than zero")
     @Schema(
             description = "Available amount of eazy bank account",
             example = "5000"
     )
-    private Long availableAmount;
+    private int availableAmount;
 
 }

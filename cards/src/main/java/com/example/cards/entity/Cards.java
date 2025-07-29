@@ -8,7 +8,7 @@ import lombok.*;
 @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Cards {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "card_id")
     private Long cardId;
 
@@ -22,11 +22,11 @@ public class Cards {
     private String cardType;
 
     @Column(name = "total_limit")
-    private Long totalLimit;
+    private int totalLimit;
 
     @Column(name = "amount_used")
-    private Long amountUsed;
+    private int amountUsed;
 
     @Column(name = "available_amount")
-    private Long availableAmount;
+    private int availableAmount;
 }
