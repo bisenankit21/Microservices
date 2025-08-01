@@ -1,4 +1,4 @@
-package com.example.cards.service;
+package com.example.cards.service.impl;
 
 import com.example.cards.constants.CardsConstants;
 import com.example.cards.dto.CardsDto;
@@ -7,6 +7,7 @@ import com.example.cards.exception.CardsAlreadyPresentException;
 import com.example.cards.exception.ResourceNotFoundExceptions;
 import com.example.cards.mapper.CardsMapper;
 import com.example.cards.repository.CardsRepository;
+import com.example.cards.service.IcardService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -15,7 +16,7 @@ import java.util.Random;
 
 @Service
 @AllArgsConstructor
-public class CardServiceImpl implements IcardService{
+public class CardServiceImpl implements IcardService {
 
     private CardsRepository cardsRepository;
     @Override
