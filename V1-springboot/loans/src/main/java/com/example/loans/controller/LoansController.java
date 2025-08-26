@@ -2,6 +2,7 @@ package com.example.loans.controller;
 
 import com.example.loans.constants.LoansConstants;
 import com.example.loans.dto.ErrorResponseDto;
+import com.example.loans.dto.LoansContactInfo;
 import com.example.loans.dto.LoansDto;
 import com.example.loans.dto.ResponseDto;
 import com.example.loans.service.ILoansService;
@@ -14,6 +15,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +30,20 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
 @Validated
 public class LoansController {
     private ILoansService iLoansService;
+    public LoansController(ILoansService iLoansService) {
+        this.iLoansService = iLoansService;
+    }
+    @Autowired
+    private Environment environment;
+
+    @Value("${build.version}")
+    private String buildVersion;
+
+    @Autowired
+    private LoansContactInfo loansContactInfo;
 
     @Operation(
             summary = "Create Loan REST API",
@@ -157,5 +171,74 @@ public class LoansController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(LoansConstants.STATUS_417, LoansConstants.MESSAGE_417_DELETE));
         }
+    }
+    @Operation(
+            summary = "Get Build Information",
+            description = "Get build information that is deployed into cards microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo(){
+        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+    }
+
+    @Operation(
+            summary = "Get Java Version",
+            description = "Get java version that is installed into accounts microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion(){
+        return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+    }
+
+
+    @Operation(
+            summary = "Get contact info",
+            description = "Contact information Details for any issue"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<LoansContactInfo> getContactInfo(){
+        return ResponseEntity.status(HttpStatus.OK).body(loansContactInfo);
     }
 }
