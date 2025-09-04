@@ -1,12 +1,8 @@
-spring:
-  config:
-    activate:
-      on-profile: "qa"
 build:
   version: "3.0"
 
-loans:
-  message : "Welcome to EazyBank loans related qa APIs"
+cards:
+  message : "Welcome to EazyBank Cards related qa APIs"
   contactDetails:
     name: "Ankit Bisen- Java Developer"
     email: "akitbisen21@gmail.com"

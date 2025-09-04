@@ -1,0 +1,12 @@
+build:
+  version: "3.0"
+
+accounts:
+  message : "Welcome to EazyBank accounts related local APIs"
+  contactDetails:
+    name: "Ankit Bisen- Java Developer"
+    email: "akitbisen21@gmail.com"
+  onCallSupport:
+    -1234567890
+    -0987654321
+
