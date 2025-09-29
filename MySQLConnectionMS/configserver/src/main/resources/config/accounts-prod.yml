@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+accounts:
+  message : "Welcome to EazyBank accounts Prod APIs"
+  contactDetails:
+    name: "Ankit Bisen- Product owner"
+    email: "ankitbisen21@gmail.com"
+  onCallSupport:
+    -1234567890
+    -0987654321

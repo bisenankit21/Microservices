@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+accounts:
+  message : "Welcome to EazyBank accounts related QA APIs"
+  contactDetails:
+    name: "Pawan Bisen- QA Lead"
+    email: "pawanbisen21@gmail.com"
+  onCallSupport:
+    -1234567890
+    -0987654321
