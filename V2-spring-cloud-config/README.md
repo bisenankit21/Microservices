@@ -18,3 +18,5 @@ hookdeck login --cli-key 29y6m2e21ws5y4zz2y7m93i66bjgmqfjb1gpf6kzuahbb4pbv4
 then ctrl+c
 hookdeck listen 8071 source --cli-path /monitor
 ----------this will give you one source URL 
+
+Use this command to start rabbit mq on gitbash :    winpty docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
