@@ -1,22 +1,21 @@
-service:
+services:
   network-deploy-service:
-    network:
+    networks:
       - ankit092
 
-  microservices-base-config:
+  microservice-base-config:
     extends:
       service: network-deploy-service
     deploy:
       resources:
         limits:
           memory: 700m
+    environment:
+      SPRING_RABBITMQ_HOST: "rabbit"
 
   microservice-configserver-config:
     extends:
-      service: microservices-base-config
-    depends_on:
-      configserver:
-        condition: service_healthy
+      service: microservice-base-config
     environment:
       SPRING_PROFILES_ACTIVE: default
-      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
